@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'CMS Driven Application',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -35,19 +35,17 @@ return array(
 			),
 		),
 		*/
-		'db'=>array(
+		/*'db'=>array(
 			'connectionString' => 'sqlite:protected/data/testdrive.db',
-		),
+        ),*/
 		// uncomment the following to use a MySQL database
-		/*
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+			'connectionString' => 'mysql:host=localhost;dbname=cmsmod',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+			'username' => 'balor',
+			'password' => 'balordev123',
 			'charset' => 'utf8',
 		),
-		*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
             'errorAction'=>'site/error',

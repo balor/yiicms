@@ -1,0 +1,8 @@
+2010/03/20 12:53:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "user".' in /home/balor/dev/yii_cmsmod/framework/web/CController.php:439
+Stack trace:
+#0 /home/balor/dev/yii_cmsmod/framework/web/CController.php(262): CController->missingAction('user')
+#1 /home/balor/dev/yii_cmsmod/framework/web/CWebApplication.php(320): CController->run('user')
+#2 /home/balor/dev/yii_cmsmod/framework/web/CWebApplication.php(120): CWebApplication->runController('site/user/')
+#3 /home/balor/dev/yii_cmsmod/framework/base/CApplication.php(135): CWebApplication->processRequest()
+#4 /home/balor/dev/yii_cmsmod/cmsmod/index.php(12): CApplication->run()
+#5 {main} REQUEST_URI=/dev/yii_cmsmod/cmsmod/index.php?r=site/user/
