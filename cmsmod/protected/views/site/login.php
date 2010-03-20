@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note">Pola z <span class="required">*</span> są wymagane.</p>
+	<p class="note">Pola oznaczone <span class="required">*</span> są wymagane.</p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'username'); ?>

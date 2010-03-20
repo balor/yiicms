@@ -12,6 +12,13 @@ class CmsModule extends CWebModule
 			'cms.models.*',
 			'cms.components.*',
 		));
+
+        $baseDir = dirname(__FILE__);
+        $assets = Yii::app()->getAssetManager()->publish(
+            $baseDir.DIRECTORY_SEPARATOR.'assets');
+        Yii::app()->getClientScript()->registerCssFile(
+            $assets.'/cmsmod.css');
+
 	}
 
 	public function beforeControllerAction($controller, $action)

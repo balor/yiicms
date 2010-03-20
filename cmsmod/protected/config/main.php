@@ -18,6 +18,11 @@ return array(
 		'application.components.*',
 	),
 
+    // modules
+    'modules'=>array(
+        'cms'=>array(),
+    ),
+
 	// application components
 	'components'=>array(
 		'user'=>array(
