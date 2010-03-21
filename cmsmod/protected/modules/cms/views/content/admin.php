@@ -1,7 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Zasoby'=>array('index'),
-	'Zarządzaj',
+	'Panel administracyjny'=>array('/cms/default/index'),
 );
 
 $this->menu=array(

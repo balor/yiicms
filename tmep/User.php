@@ -38,13 +38,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+            array('email', 'unique'),
+            array('email', 'email'),
             array('password', 'compare', 'compareAttribute'=>'password_rep'),
 			array('email, password, password_rep, last_login_time, registration_time', 'required'),
 			array('last_login_time, registration_time', 'numerical', 'integerOnly'=>true),
-			array('email, password', 'length', 'max'=>124),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, email, password, last_login_time, registration_time', 'safe', 'on'=>'search'),
+			array('email, password, password_rep', 'length', 'max'=>124),
 		);
 	}
 
@@ -65,12 +64,12 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Nr porządkowy',
-			'email' => 'Login',
+			'id' => 'Id',
+			'email' => 'Email',
 			'password' => 'Hasło',
             'password_rep' => 'Potwierdź hasło',
-			'last_login_time' => 'Ostatnio zalogowany',
-			'registration_time' => 'Czas rejestracji',
+			'last_login_time' => 'Last Login Time',
+			'registration_time' => 'Registration Time',
 		);
 	}
 
@@ -80,30 +79,4 @@ class User extends CActiveRecord
         $this->password = $pass;
         return true;
     }
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-
-		$criteria->compare('email',$this->email,true);
-
-		$criteria->compare('password',$this->password,true);
-
-		$criteria->compare('last_login_time',$this->last_login_time);
-
-		$criteria->compare('registration_time',$this->registration_time);
-
-		return new CActiveDataProvider('User', array(
-			'criteria'=>$criteria,
-		));
-	}
 }

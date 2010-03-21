@@ -32,7 +32,7 @@ $this->menu=array(
 
 <br />
 <br />
-<strong>Podgląd zawartości zasobu:</strong>
+<strong>Podgląd:</strong>
 <div id="content_preview">
     <?php echo $model->html; ?>
 </div>

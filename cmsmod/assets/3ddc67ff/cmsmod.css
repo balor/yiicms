@@ -2,3 +2,18 @@
     margin: 15px 0px;
     border: 1px #ccccee solid;
 }
+
+.main_link {
+    font-weight:bold;
+    font-size:16px;
+    color: #3333aa;
+}
+
+.main_links_list li {
+    padding:5px;
+    margin:10px 0px;
+}
+
+.main_links_list {
+    list-style-type:circle;
+}

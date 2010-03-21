@@ -2,11 +2,7 @@
 
 class UserController extends Controller
 {
-	/**
-	 * @var string the default layout for the views. Defaults to 'column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	public $layout='column2';
+	const PAGE_SIZE=10;
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
@@ -32,15 +28,15 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('register'),
+				'actions'=>array('index','view','register'),
 				'users'=>array('*'),
-            ),
+			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('view','admin'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('delete','create','update'),
+				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -58,8 +54,8 @@ class UserController extends Controller
 			'model'=>$this->loadModel(),
 		));
 	}
-    
-    /**
+
+	/**
 	 * Registers new user.
 	 * If creation is successful, the browser will be redirected to the 'site/index' page.
 	 */
@@ -90,10 +86,6 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
@@ -113,10 +105,6 @@ class UserController extends Controller
 	public function actionUpdate()
 	{
 		$model=$this->loadModel();
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
@@ -141,7 +129,7 @@ class UserController extends Controller
 			$this->loadModel()->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
+			if(!isset($_POST['ajax']))
 				$this->redirect(array('index'));
 		}
 		else
@@ -153,7 +141,14 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('User');
+        $dbfs = Yii::app()->getModule('dbfs')->dbfs;
+        print_r($dbfs);
+		$dataProvider=new CActiveDataProvider('User', array(
+			'pagination'=>array(
+				'pageSize'=>self::PAGE_SIZE,
+			),
+		));
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -164,12 +159,14 @@ class UserController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new User('search');
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
+		$dataProvider=new CActiveDataProvider('User', array(
+			'pagination'=>array(
+				'pageSize'=>self::PAGE_SIZE,
+			),
+		));
 
 		$this->render('admin',array(
-			'model'=>$model,
+			'dataProvider'=>$dataProvider,
 		));
 	}
 
@@ -187,18 +184,5 @@ class UserController extends Controller
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $this->_model;
-	}
-
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
 	}
 }

@@ -73,6 +73,8 @@ class ContentController extends Controller
 		if(isset($_POST['Content']))
 		{
 			$model->attributes=$_POST['Content'];
+            $model->created=time();
+            $model->modified=time();
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -96,6 +98,7 @@ class ContentController extends Controller
 		if(isset($_POST['Content']))
 		{
 			$model->attributes=$_POST['Content'];
+            $model->modified=time();
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -129,6 +132,7 @@ class ContentController extends Controller
 	 */
 	public function actionIndex()
 	{
+        $this->redirect($this->createUrl('/cms/content/admin'));
 		$dataProvider=new CActiveDataProvider('Content');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

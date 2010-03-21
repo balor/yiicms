@@ -1,14 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	$this->module->id,
+	'Panel administracyjny',
 );
 ?>
-<h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1>
-
-<p>
-This is the view content for action "<?php echo $this->action->id; ?>".
-The action belongs to the controller "<?php echo get_class($this); ?>" in the "<?php echo $this->module->id; ?>" module.
-</p>
-<p>
-You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
-</p>
+<h1>Panel administracyjny</h1>
+<ul class="main_links_list">
+    <li>
+        <?php echo CHtml::link('Zarządzaj zawartością strony',
+            $this->createUrl('/cms/content/admin'),
+            array('class'=>'main_link'));?>
+    </li>
+    <li>
+    <?php echo CHtml::link('Zarządzaj użytkownikami',
+        $this->createUrl('/user/admin'),
+        array('class'=>'main_link'));?>
+    </li>
+</ul>

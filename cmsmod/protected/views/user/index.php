@@ -2,14 +2,14 @@
 $this->breadcrumbs=array(
 	'Users',
 );
+
+$this->menu=array(
+	array('label'=>'Create User', 'url'=>array('create')),
+	array('label'=>'Manage User', 'url'=>array('admin')),
+);
 ?>
 
-<h1>List User</h1>
-
-<ul class="actions">
-	<li><?php echo CHtml::link('Create User',array('create')); ?></li>
-	<li><?php echo CHtml::link('Manage User',array('admin')); ?></li>
-</ul><!-- actions -->
+<h1>Users</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
