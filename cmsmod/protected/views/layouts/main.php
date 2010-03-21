@@ -19,6 +19,11 @@
 
 <body>
 
+<?php
+if (!Yii::app()->user->isGuest)
+    echo '<div style="border:1px solid #dfdfdf; margin:5px; padding:2px; background: #fafafa;">Zalogowany jako <strong>'.Yii::app()->user->name.'</strong>. '.CHtml::link('Otwórz panel administracyjny', $this->createUrl('/cms/default/index')).'</div>';
+?>
+
 <div class="container" id="page">
 
 	<div id="header">
@@ -46,10 +51,6 @@
 	<div id="footer">
 		Copyright &copy; <?php echo date('Y'); ?> by MadCowCreations.<br/>
 		All Rights Reserved.<br/>
-<?php
-if (!Yii::app()->user->isGuest)
-    echo '<div style="border:1px solid #dfdfdf; margin:5px; padding:2px; background: #fafafa;">Zalogowany jako <strong>'.Yii::app()->user->name.'</strong>, '.CHtml::link('Otwórz panel administracyjny', $this->createUrl('/cms/default/index')).'</div>';
-?>
 	</div><!-- footer -->
 
 </div><!-- page -->
