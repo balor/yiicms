@@ -19,10 +19,7 @@
 
 <body>
 
-<?php
-if (!Yii::app()->user->isGuest)
-    echo '<div style="border:1px solid #dfdfdf; margin:5px; padding:2px; background: #fafafa;">Zalogowany jako <strong>'.Yii::app()->user->name.'</strong>. '.CHtml::link('Otwórz panel administracyjny', $this->createUrl('/cms/default/index')).'</div>';
-?>
+<?php echo Yii::app()->getModule('cms')->getControlBox('/site/logout'); ?>
 
 <div class="container" id="page">
 
@@ -34,10 +31,10 @@ if (!Yii::app()->user->isGuest)
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				/*array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-                array('label'=>'Contact', 'url'=>array('/site/contact')),*/
+				array('label'=>'Example', 'url'=>array('/site/page', 'view'=>'about')),
+                /*array('label'=>'Contact', 'url'=>array('/site/contact')),*/
                 array('label'=>'Zaloguj się', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Wyloguj ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				//array('label'=>'Wyloguj ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->

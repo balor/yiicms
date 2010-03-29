@@ -18,8 +18,27 @@ class CmsModule extends CWebModule
             $baseDir.DIRECTORY_SEPARATOR.'assets');
         Yii::app()->getClientScript()->registerCssFile(
             $assets.'/cmsmod.css');
-
 	}
+
+    public function getContent($content_id)
+    {
+        $content = Content::model()->findByPk($content_id);
+        return $content->attributes;
+    }
+
+    public function getControlBox($logout_action)
+    {
+        if (!Yii::app()->user->isGuest)
+            return '<div style="border:1px solid #dfdfdf; margin:5px;'.
+                    'padding:2px; background: #fafafa;">'.
+                        'Zalogowany jako <strong>'.Yii::app()->user->name.'</strong>. '.
+                        CHtml::link('Otwórz panel administracyjny', 
+                            Yii::app()->createUrl('/cms/default/index')).' | '.
+                        CHtml::link('Wyloguj się', Yii::app()->createUrl('/site/logout')).
+                '</div>';
+        return '';
+    }
+
 
 	public function beforeControllerAction($controller, $action)
 	{

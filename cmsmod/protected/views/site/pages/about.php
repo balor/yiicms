@@ -1,10 +1,16 @@
 <?php
 $this->pageTitle=Yii::app()->name . ' - About';
 $this->breadcrumbs=array(
-	'About',
+	'Example',
 );
+$content = Yii::app()->getModule('cms')->getContent(2);
 ?>
-<h1>About</h1>
 
-<p>This is a "static" page. You may change the content of this page
-by updating the file <tt><?php echo __FILE__; ?></tt>.</p>
+<h1><?php echo $content['name']; ?></h1>
+
+<div style="border:1px solid #999;padding:5px;margin:10px 0px;">
+Tekst napisany przez <?php echo $content['author']; ?> dnia <?php echo date("Y.m.d", $content['created']); ?>.<br />
+Ostatnia aktualizacja odbyła się <?php echo date("Y.m.d H:i", $content['created']); ?>.<br />
+</div>
+
+<?php echo $content['html']; ?>

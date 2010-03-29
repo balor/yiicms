@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	$model->id,
+	'Zarządzaj użytkownikami'=>array('index'),
+	$model->email,
 );
 
 $this->menu=array(
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'Update User', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete User', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure to delete this item?')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'Dodaj użytkownika', 'url'=>array('create')),
+	array('label'=>'Edytuj użytkownika', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Usuń użytkownika', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Czy na pewno usunąć tego użytkownika?')),
+	array('label'=>'Zarządzaj użytkownikami', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View user <?php echo $model->email; ?></h1>
+<h1>Dane użytkownika <?php echo $model->email; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

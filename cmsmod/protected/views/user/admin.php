@@ -1,11 +1,11 @@
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Manage',
+	'Panel administracyjny'=>array('/cms/default/index'),
+	'Zarządzanie użytkownikami',
 );
 
 $this->menu=array(
-	array('label'=>'Create User', 'url'=>array('create')),
+	array('label'=>'Dodaj użytkownika', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -47,6 +47,7 @@ $('.search-form form').submit(function(){
             'value'=>'date("Y.m.d H:i:s",$data->registration_time)'
             ),
 		array(
+            'header'=>'Operacje',
 			'class'=>'CButtonColumn',
 		),
 	),

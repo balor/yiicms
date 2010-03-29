@@ -1,6 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Panel administracyjny'=>array('/cms/default/index'),
+	'Zarządzanie zarartością',
 );
 
 $this->menu=array(

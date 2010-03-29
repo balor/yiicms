@@ -1,14 +1,14 @@
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Create',
+	'Zarządzaj użytkownikami'=>array('admin'),
+	'Dodaj użytkownika',
 );
 
 $this->menu=array(
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'Zarządzaj użytkownikami', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create User</h1>
+<h1>Dodaj użytkownika</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

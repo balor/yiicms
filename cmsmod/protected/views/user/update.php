@@ -1,17 +1,16 @@
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Zarządzaj użytkownikami'=>array('admin'),
+	$model->email=>array('view','id'=>$model->id),
+	'Edytuj użytkownika',
 );
 
 $this->menu=array(
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'Dodaj użytkownika', 'url'=>array('create')),
+	array('label'=>'Pokaż użytkownika', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Zarządzaj użytkownikami', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update User <?php echo $model->id; ?></h1>
-
+<h1>Edytuj użytkownika <?php echo $model->email; ?></h1>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
