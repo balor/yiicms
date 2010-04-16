@@ -2,6 +2,8 @@
 
 class CmsModule extends CWebModule
 {
+    public $assets = null;
+
 	public function init()
 	{
 		// this method is called when the module is being created
@@ -16,6 +18,7 @@ class CmsModule extends CWebModule
         $baseDir = dirname(__FILE__);
         $assets = Yii::app()->getAssetManager()->publish(
             $baseDir.DIRECTORY_SEPARATOR.'assets');
+        $this->assets = $assets;
         Yii::app()->getClientScript()->registerCssFile(
             $assets.'/cmsmod.css');
 	}

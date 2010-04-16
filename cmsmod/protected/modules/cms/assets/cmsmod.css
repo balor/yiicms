@@ -14,6 +14,12 @@
     margin:10px 0px;
 }
 
+.main_links_list li img {
+    margin-bottom:-3px;
+    margin-right:10px;
+}
+
 .main_links_list {
-    list-style-type:circle;
+    list-style-type:none;
+    padding-left: 20px;
 }
