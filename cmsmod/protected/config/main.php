@@ -20,7 +20,17 @@ return array(
 
     // modules
     'modules'=>array(
-        'cms'=>array(),
+        'cms'=>array(
+            'submodules'=>array('content','gallery'),
+            'content'=>array(
+                'use_editor'=>true,
+            ),
+            'gallery'=>array(
+                'storage_path'=>'/home/balor/dev/yii_cmsmod/storage/',
+                'icon_size'=>'200x200',
+                'thumbnail_size'=>'150x150',
+            ),
+        ),
     ),
 
 	// application components

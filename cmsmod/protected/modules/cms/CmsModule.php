@@ -2,7 +2,24 @@
 
 class CmsModule extends CWebModule
 {
+    // assets dir, generated dynamicly in constructor
     public $assets = null;
+
+    // enabled CMS submodules
+    // currently avalible: content, gallery
+    public $submodules = array("content");
+
+    // content submodule settings
+    public $content = array(
+        'use_editor'=>false,
+    );
+
+    // gallery submodule settings
+    public $gallery = array(
+        'storage_path'=>'/tmp/',
+        'icon_size'=>'100x100',
+        'thumbnail_size'=>'100x100',
+    );
 
 	public function init()
 	{
