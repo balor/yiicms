@@ -39,7 +39,6 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		'id',
 		'name',
-		'icon_path',
         array(
             'name'=>'created',
             'value'=>'date("Y.m.d H:i:s", $data->created)',
@@ -47,6 +46,7 @@ $('.search-form form').submit(function(){
 		array(
             'header'=>'Operacje',
 			'class'=>'CButtonColumn',
+            'deleteConfirmation'=>'Czy na pewno skasować tą galerię?',
 		),
 	),
 )); ?>

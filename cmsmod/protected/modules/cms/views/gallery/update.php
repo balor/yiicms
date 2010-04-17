@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Galleries'=>array('index'),
+	'Zarządzanie galeriami'=>array('admin'),
 	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	'Edycja galerii',
 );
 
 $this->menu=array(
-	array('label'=>'List Gallery', 'url'=>array('index')),
-	array('label'=>'Create Gallery', 'url'=>array('create')),
-	array('label'=>'View Gallery', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Gallery', 'url'=>array('admin')),
+//	array('label'=>'List Gallery', 'url'=>array('index')),
+	array('label'=>'Utwórz galerię', 'url'=>array('create')),
+	array('label'=>'Podgląd galerii', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Zarządzaj galeriami', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Gallery <?php echo $model->id; ?></h1>
+<h1>Edytuj galerię <?php echo $model->name; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

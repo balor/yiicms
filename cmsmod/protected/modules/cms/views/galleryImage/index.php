@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Gallery Items',
+	'Gallery Images',
 );
 
 $this->menu=array(
-	array('label'=>'Create GalleryItem', 'url'=>array('create')),
-	array('label'=>'Manage GalleryItem', 'url'=>array('admin')),
+	array('label'=>'Create GalleryImage', 'url'=>array('create')),
+	array('label'=>'Manage GalleryImage', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Gallery Items</h1>
+<h1>Gallery Images</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

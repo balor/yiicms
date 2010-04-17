@@ -1,6 +1,6 @@
 <?php
 
-class GalleryController extends Controller
+class GalleryFolderController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to 'column2', meaning
@@ -31,18 +31,18 @@ class GalleryController extends Controller
 	public function accessRules()
 	{
 		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
+			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
-            ),*/
+			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('update','admin','view'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('create','delete'),
+				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-            ),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -65,17 +65,15 @@ class GalleryController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Gallery;
+		$model=new GalleryFolder;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Gallery']))
+		if(isset($_POST['GalleryFolder']))
 		{
-			$model->attributes=$_POST['Gallery'];
-            $model->created=time();
-
-			if ($model->save())
+			$model->attributes=$_POST['GalleryFolder'];
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
@@ -95,9 +93,9 @@ class GalleryController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Gallery']))
+		if(isset($_POST['GalleryFolder']))
 		{
-			$model->attributes=$_POST['Gallery'];
+			$model->attributes=$_POST['GalleryFolder'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -131,7 +129,7 @@ class GalleryController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Gallery');
+		$dataProvider=new CActiveDataProvider('GalleryFolder');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -142,9 +140,9 @@ class GalleryController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Gallery('search');
-		if(isset($_GET['Gallery']))
-			$model->attributes=$_GET['Gallery'];
+		$model=new GalleryFolder('search');
+		if(isset($_GET['GalleryFolder']))
+			$model->attributes=$_GET['GalleryFolder'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -160,7 +158,7 @@ class GalleryController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Gallery::model()->findbyPk($_GET['id']);
+				$this->_model=GalleryFolder::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -173,7 +171,7 @@ class GalleryController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='gallery-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='gallery-folder-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

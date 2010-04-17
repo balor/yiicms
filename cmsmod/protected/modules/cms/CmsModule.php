@@ -59,6 +59,10 @@ class CmsModule extends CWebModule
         return '';
     }
 
+    public function submoduleLoaded($submodule)
+    {
+        return in_array($submodule, $this->submodules);
+    }
 
 	public function beforeControllerAction($controller, $action)
 	{

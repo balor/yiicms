@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Gallery Items'=>array('index'),
+	'Gallery Folders'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List GalleryItem', 'url'=>array('index')),
-	array('label'=>'Create GalleryItem', 'url'=>array('create')),
+	array('label'=>'List GalleryFolder', 'url'=>array('index')),
+	array('label'=>'Create GalleryFolder', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('gallery-item-grid', {
+	$.fn.yiiGridView.update('gallery-folder-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Gallery Items</h1>
+<h1>Manage Gallery Folders</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -38,20 +38,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'gallery-item-grid',
+	'id'=>'gallery-folder-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'title',
-		'author',
-		'image_path',
-		'image_dimensions',
-		'image_size',
-		/*
-		'image_filename',
+		'name',
+		'gallery_id',
+		'icon',
 		'created',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

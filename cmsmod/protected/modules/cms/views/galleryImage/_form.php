@@ -1,30 +1,30 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'gallery-item-form',
+	'id'=>'gallery-image-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Pola oznaczone <span class="required">*</span> są wymagane</p>
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'title'); ?>
-		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'title'); ?>
+		<?php echo $form->labelEx($model,'gallery_folder_id'); ?>
+		<?php echo $form->textField($model,'gallery_folder_id'); ?>
+		<?php echo $form->error($model,'gallery_folder_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'name'); ?>
+		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'name'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'author'); ?>
 		<?php echo $form->textField($model,'author',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'author'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'image_path'); ?>
-		<?php echo $form->textField($model,'image_path',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'image_path'); ?>
 	</div>
 
 	<div class="row">
@@ -52,7 +52,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Utwórz' : 'Zapisz'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

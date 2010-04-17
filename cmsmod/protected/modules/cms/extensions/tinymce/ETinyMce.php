@@ -809,6 +809,7 @@ class ETinyMce extends CInputWidget
       $baseDir = dirname(__FILE__);
       $assets = Yii::app()->getAssetManager()->publish($baseDir.DIRECTORY_SEPARATOR.'assets');
 
+      $tinymce = '';
       $tinyOptions = $this->makeOptions($tinymce);
       $jsUseCookies = ($this->useCookies) ? 'true' : 'false';
       $jsMode = strval($this->mode);

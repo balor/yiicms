@@ -1,11 +1,12 @@
 <?php
 
-class Gallery extends CActiveRecord
+class GalleryFolder extends CActiveRecord
 {
 	/**
-	 * The followings are the available columns in table 'Gallery':
+	 * The followings are the available columns in table 'GalleryFolder':
 	 * @var integer $id
 	 * @var string $name
+	 * @var integer $gallery_id
 	 * @var string $icon
 	 * @var integer $created
 	 */
@@ -24,7 +25,7 @@ class Gallery extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Gallery';
+		return 'GalleryFolder';
 	}
 
 	/**
@@ -35,12 +36,12 @@ class Gallery extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
-			array('created', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>255),
+			array('name, gallery_id, icon, created', 'required'),
+			array('gallery_id, created', 'numerical', 'integerOnly'=>true),
+			array('name, icon', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, created', 'safe', 'on'=>'search'),
+			array('id, name, gallery_id, icon, created', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,9 +62,11 @@ class Gallery extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Nr porządkowy',
-			'name' => 'Nazwa galerii',
-			'created' => 'Utworzono',
+			'id' => 'Id',
+			'name' => 'Name',
+			'gallery_id' => 'Gallery',
+			'icon' => 'Icon',
+			'created' => 'Created',
 		);
 	}
 
@@ -82,9 +85,13 @@ class Gallery extends CActiveRecord
 
 		$criteria->compare('name',$this->name,true);
 
+		$criteria->compare('gallery_id',$this->gallery_id);
+
+		$criteria->compare('icon',$this->icon,true);
+
 		$criteria->compare('created',$this->created);
 
-		return new CActiveDataProvider('Gallery', array(
+		return new CActiveDataProvider('GalleryFolder', array(
 			'criteria'=>$criteria,
 		));
 	}

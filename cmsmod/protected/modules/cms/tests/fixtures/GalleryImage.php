@@ -3,18 +3,18 @@
 return array(
 	/*
 	'sample1'=>array(
-		'title' => '',
+		'gallery_folder_id' => '',
+		'name' => '',
 		'author' => '',
-		'image_path' => '',
 		'image_dimensions' => '',
 		'image_size' => '',
 		'image_filename' => '',
 		'created' => '',
 	),
 	'sample2'=>array(
-		'title' => '',
+		'gallery_folder_id' => '',
+		'name' => '',
 		'author' => '',
-		'image_path' => '',
 		'image_dimensions' => '',
 		'image_size' => '',
 		'image_filename' => '',

@@ -1,6 +1,6 @@
 <?php
 
-class GalleryItemController extends Controller
+class GalleryImageController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to 'column2', meaning
@@ -65,14 +65,14 @@ class GalleryItemController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new GalleryItem;
+		$model=new GalleryImage;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['GalleryItem']))
+		if(isset($_POST['GalleryImage']))
 		{
-			$model->attributes=$_POST['GalleryItem'];
+			$model->attributes=$_POST['GalleryImage'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -93,9 +93,9 @@ class GalleryItemController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['GalleryItem']))
+		if(isset($_POST['GalleryImage']))
 		{
-			$model->attributes=$_POST['GalleryItem'];
+			$model->attributes=$_POST['GalleryImage'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -129,7 +129,7 @@ class GalleryItemController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('GalleryItem');
+		$dataProvider=new CActiveDataProvider('GalleryImage');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -140,9 +140,9 @@ class GalleryItemController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new GalleryItem('search');
-		if(isset($_GET['GalleryItem']))
-			$model->attributes=$_GET['GalleryItem'];
+		$model=new GalleryImage('search');
+		if(isset($_GET['GalleryImage']))
+			$model->attributes=$_GET['GalleryImage'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -158,7 +158,7 @@ class GalleryItemController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=GalleryItem::model()->findbyPk($_GET['id']);
+				$this->_model=GalleryImage::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -171,7 +171,7 @@ class GalleryItemController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='gallery-item-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='gallery-image-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

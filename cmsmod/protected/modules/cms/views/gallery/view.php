@@ -5,11 +5,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Gallery', 'url'=>array('index')),
-	array('label'=>'Create Gallery', 'url'=>array('create')),
-	array('label'=>'Update Gallery', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Gallery', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure to delete this item?')),
-	array('label'=>'Manage Gallery', 'url'=>array('admin')),
+	array('label'=>'Utwórz galerię', 'url'=>array('create')),
+	array('label'=>'Edytuj galerię', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Skasuj galerię', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Czy na pewno skasować tą galerię?')),
+	array('label'=>'Zarządzaj galeriami', 'url'=>array('admin')),
+	//array('label'=>'List Gallery', 'url'=>array('index')),
+	//array('label'=>'Create Gallery', 'url'=>array('create')),
 );
 ?>
 
@@ -19,7 +20,6 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'name',
-		'icon_path',
         array(
             'name'=>'created',
             'value'=>date("Y.m.d H:i:s", $model->created),

@@ -50,6 +50,7 @@ $('.search-form form').submit(function(){
 		array(
             'header'=>'Operacje',
 			'class'=>'CButtonColumn',
+            'deleteConfirmation'=>'Czy na pewno skasować ten zasób?',
 		),
 	),
 )); ?>

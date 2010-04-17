@@ -11,18 +11,18 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'title'); ?>
-		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->label($model,'gallery_folder_id'); ?>
+		<?php echo $form->textField($model,'gallery_folder_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'name'); ?>
+		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'author'); ?>
 		<?php echo $form->textField($model,'author',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'image_path'); ?>
-		<?php echo $form->textField($model,'image_path',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">

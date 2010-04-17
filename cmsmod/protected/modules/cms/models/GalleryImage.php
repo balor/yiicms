@@ -1,13 +1,13 @@
 <?php
 
-class GalleryItem extends CActiveRecord
+class GalleryImage extends CActiveRecord
 {
 	/**
-	 * The followings are the available columns in table 'GalleryItem':
+	 * The followings are the available columns in table 'GalleryImage':
 	 * @var integer $id
-	 * @var string $title
+	 * @var integer $gallery_folder_id
+	 * @var string $name
 	 * @var string $author
-	 * @var string $image_path
 	 * @var string $image_dimensions
 	 * @var integer $image_size
 	 * @var string $image_filename
@@ -28,7 +28,7 @@ class GalleryItem extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'GalleryItem';
+		return 'GalleryImage';
 	}
 
 	/**
@@ -39,13 +39,13 @@ class GalleryItem extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, image_path, image_filename, created', 'required'),
-			array('image_size, created', 'numerical', 'integerOnly'=>true),
-			array('title, author, image_path, image_filename', 'length', 'max'=>255),
+			array('gallery_folder_id, name, image_filename, created', 'required'),
+			array('gallery_folder_id, image_size, created', 'numerical', 'integerOnly'=>true),
+			array('name, author, image_filename', 'length', 'max'=>255),
 			array('image_dimensions', 'length', 'max'=>40),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, author, image_path, image_dimensions, image_size, image_filename, created', 'safe', 'on'=>'search'),
+			array('id, gallery_folder_id, name, author, image_dimensions, image_size, image_filename, created', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,14 +66,14 @@ class GalleryItem extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Nr porządkowy',
-			'title' => 'Tytuł',
-			'author' => 'Autor',
-			'image_path' => 'Ścieżka do obrazu',
-			'image_dimensions' => 'Rozmiar obrazu',
-			'image_size' => 'Waga obrazu',
-			'image_filename' => 'Nazwa pliku obrazu',
-			'created' => 'Utworzono',
+			'id' => 'Id',
+			'gallery_folder_id' => 'Gallery Folder',
+			'name' => 'Name',
+			'author' => 'Author',
+			'image_dimensions' => 'Image Dimensions',
+			'image_size' => 'Image Size',
+			'image_filename' => 'Image Filename',
+			'created' => 'Created',
 		);
 	}
 
@@ -90,11 +90,11 @@ class GalleryItem extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 
-		$criteria->compare('title',$this->title,true);
+		$criteria->compare('gallery_folder_id',$this->gallery_folder_id);
+
+		$criteria->compare('name',$this->name,true);
 
 		$criteria->compare('author',$this->author,true);
-
-		$criteria->compare('image_path',$this->image_path,true);
 
 		$criteria->compare('image_dimensions',$this->image_dimensions,true);
 
@@ -104,7 +104,7 @@ class GalleryItem extends CActiveRecord
 
 		$criteria->compare('created',$this->created);
 
-		return new CActiveDataProvider('GalleryItem', array(
+		return new CActiveDataProvider('GalleryImage', array(
 			'criteria'=>$criteria,
 		));
 	}

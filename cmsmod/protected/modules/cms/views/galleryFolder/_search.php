@@ -16,6 +16,16 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'gallery_id'); ?>
+		<?php echo $form->textField($model,'gallery_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'icon'); ?>
+		<?php echo $form->textField($model,'icon',array('size'=>60,'maxlength'=>255)); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'created'); ?>
 		<?php echo $form->textField($model,'created'); ?>
 	</div>

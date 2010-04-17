@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 16 Kwi 2010, 22:39
+-- Czas wygenerowania: 17 Kwi 2010, 02:45
 -- Wersja serwera: 5.1.45
 -- Wersja PHP: 5.3.2
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Content` (
 --
 
 INSERT INTO `Content` (`id`, `html`, `author`, `created`, `modified`, `name`) VALUES
-(2, '<p><strong>To jest testowa zawarto¿¿<br />moderowana za pomoc¿<br />modu¿u CMS do YII Framework :)</strong></p>\r\n<p style="text-align: center;"><em><span style="font-size: small;"><span style="color: #008080;">Musz¿ przyzna¿ ¿e jest to<br />WYGODNA<br />metoda moderowania strony, hope it will be useful...</span></span></em></p>\r\n<p style="text-align: right;"><span style="color: #008080;"><span style="font-size: x-small;"><span style="font-size: medium;"><strong><span style="font-size: large;">CYA</span></strong></span></span></span></p>\r\n<p style="text-align: right;"><span style="color: #008080;"><span style="font-size: x-small;"><span style="font-size: medium;"><strong><span style="font-size: large;">BALOR :*</span></strong></span></span></span></p>', 'Micha¿ Thoma', 1269182366, 1271421696, 'Przyk¿adowa strona');
+(2, '<p>Hej, jestem fajny</p>\r\n<p>:D<br /><span style="font-size: x-large;">:D</span>&nbsp;</p>\r\n<p style="text-align: center;"><strong><span style="font-size: large;"><span style="color: #ff0000;">CHUJ CI W DUPE</span></span></strong></p>', 'Micha¿ Thoma', 1269182366, 1271462129, 'Przyk¿adowy zasób');
 
 -- --------------------------------------------------------
 
@@ -45,25 +45,47 @@ INSERT INTO `Content` (`id`, `html`, `author`, `created`, `modified`, `name`) VA
 CREATE TABLE IF NOT EXISTS `Gallery` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `icon` varchar(255) DEFAULT NULL,
-  `created` int(10) unsigned NOT NULL DEFAULT '0',
+  `created` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Zrzut danych tabeli `Gallery`
+--
+
+INSERT INTO `Gallery` (`id`, `name`, `created`) VALUES
+(1, 'Przyk¿adowa galeria', 1271457889);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla  `GalleryFolder`
+--
+
+CREATE TABLE IF NOT EXISTS `GalleryFolder` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `gallery_id` int(10) unsigned NOT NULL,
+  `icon` varchar(255) NOT NULL,
+  `created` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Zrzut danych tabeli `Gallery`
+-- Zrzut danych tabeli `GalleryFolder`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla  `GalleryItem`
+-- Struktura tabeli dla  `GalleryImage`
 --
 
-CREATE TABLE IF NOT EXISTS `GalleryItem` (
+CREATE TABLE IF NOT EXISTS `GalleryImage` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
+  `gallery_folder_id` int(10) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
   `author` varchar(255) DEFAULT NULL,
   `image_dimensions` varchar(40) DEFAULT NULL,
   `image_size` int(20) unsigned NOT NULL DEFAULT '0',
@@ -73,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `GalleryItem` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Zrzut danych tabeli `GalleryItem`
+-- Zrzut danych tabeli `GalleryImage`
 --
 
 
