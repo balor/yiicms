@@ -23,3 +23,11 @@
     list-style-type:none;
     padding-left: 20px;
 }
+
+.add_link {
+    color:#449900;
+    font-weight:bold;
+    font-size:14px;
+    text-decoration:none;
+}
+

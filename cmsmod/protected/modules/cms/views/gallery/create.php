@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Zarządzanie galeriami'=>array('admin'),
+	'Zarządzanie galeriami'=>array('/cms/gallery/admin'),
 	'Utwórz galerię',
 );
 

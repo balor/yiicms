@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Gallery Folders'=>array('index'),
-	'Create',
+	'Zarządzanie galeriami'=>array('/cms/gallery/admin'),
+	$gallery->name=>array('/cms/gallery/view', 'id'=>$gallery->id),
+	'Stwórz nowy kagalog',
 );
 
 $this->menu=array(
-	array('label'=>'List GalleryFolder', 'url'=>array('index')),
-	array('label'=>'Manage GalleryFolder', 'url'=>array('admin')),
+	array('label'=>'Powrót do galerii', 'url'=>array('/cms/gallery/view', 'id'=>$gallery->id)),
 );
 ?>
 
-<h1>Create GalleryFolder</h1>
+<h1>Stwórz nowy katalog w galerii "<?php echo $gallery->name; ?>"</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

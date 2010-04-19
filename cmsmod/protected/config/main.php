@@ -27,7 +27,7 @@ return array(
             ),
             'gallery'=>array(
                 'storage_path'=>'/home/balor/dev/yii_cmsmod/storage/',
-                'icon_size'=>'200x200',
+                'icon_size'=>'50x50',
                 'thumbnail_size'=>'150x150',
             ),
         ),

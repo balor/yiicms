@@ -1,27 +1,36 @@
 <?php
 $this->breadcrumbs=array(
-	'Gallery Folders'=>array('index'),
+	'Zarządzanie galeriami'=>array('/cms/gallery/admin'),
+	$gallery->name=>array('/cms/gallery/view', 'id'=>$gallery->id),
 	$model->name,
 );
 
 $this->menu=array(
-	array('label'=>'List GalleryFolder', 'url'=>array('index')),
-	array('label'=>'Create GalleryFolder', 'url'=>array('create')),
-	array('label'=>'Update GalleryFolder', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete GalleryFolder', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure to delete this item?')),
-	array('label'=>'Manage GalleryFolder', 'url'=>array('admin')),
+	array('label'=>'Powrót do galerii', 'url'=>array('/cms/gallery/view', 'id'=>$gallery->id)),
+	array('label'=>'Stwórz nową kategorię', 'url'=>array('create', 'gal'=>$gallery->id)),
+	array('label'=>'Edytuj kategorię', 'url'=>array('update', 'id'=>$model->id, 'gal'=>$gallery->id)),
+	array('label'=>'Usuń kategorię', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Czy na pewno skasować tą kategorię?')),
 );
 ?>
 
-<h1>View GalleryFolder #<?php echo $model->id; ?></h1>
+<h1>Kategoria: <?php echo $model->name; ?> </h1>
+<h4>Kategoria z galerii "<?php echo $gallery->name; ?>"</h4>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php 
+
+$data = $model;
+$this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'name',
-		'gallery_id',
-		'icon',
-		'created',
+        array(
+            'name'=>'icon',
+            'type'=>'raw',
+            'value'=>CHtml::image(Yii::app()->createUrl("/cms/gallery/getImage", array("f"=>$data->icon)),$data->name),
+        ),
+        array(
+            'name'=>'created',
+            'value'=>date("Y.m.d H:i:s", $model->created),
+        ),
 	),
 )); ?>

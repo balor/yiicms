@@ -61,7 +61,7 @@ class Gallery extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Nr porządkowy',
+			'id' => 'Nr',
 			'name' => 'Nazwa galerii',
 			'created' => 'Utworzono',
 		);

@@ -31,10 +31,10 @@ class GalleryController extends Controller
 	public function accessRules()
 	{
 		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('getImage'),
 				'users'=>array('*'),
-            ),*/
+            ),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('update','admin','view'),
 				'users'=>array('@'),
@@ -54,8 +54,19 @@ class GalleryController extends Controller
 	 */
 	public function actionView()
 	{
+        $model = $this->loadModel();
+        $dataProvider=new CActiveDataProvider('GalleryFolder', array(
+            'criteria'=>array(
+                'condition'=>'gallery_id=:galid',
+                'params'=>array(':galid'=>$model->id),
+            ),
+            'pagination'=>array(
+                'pageSize'=>20,
+            ),
+        ));
 		$this->render('view',array(
-			'model'=>$this->loadModel(),
+			'model'=>$model,
+            'folders'=>$dataProvider,
 		));
 	}
 
@@ -83,6 +94,22 @@ class GalleryController extends Controller
 			'model'=>$model,
 		));
 	}
+
+    public function actionGetImage()
+    {
+        if (!isset($_GET['f']))
+            die();
+
+        $filename = Yii::app()->getModule('cms')->gallery['storage_path'].$_GET['f'];
+        if (!file_exists($filename))
+            die();
+
+        $mimetype = mime_content_type($filename);
+        header('Content-Type: '.$mimetype);
+
+        print file_get_contents($filename);
+        die();
+    }
 
 	/**
 	 * Updates a particular model.

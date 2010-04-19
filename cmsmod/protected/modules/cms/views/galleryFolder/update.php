@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
-	'Gallery Folders'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
+	'Zarządzanie galeriami'=>array('/cms/gallery/admin'),
+	$gallery->name=>array('/cms/gallery/view', 'id'=>$gallery->id),
 	'Update',
 );
 
 $this->menu=array(
-	array('label'=>'List GalleryFolder', 'url'=>array('index')),
-	array('label'=>'Create GalleryFolder', 'url'=>array('create')),
-	array('label'=>'View GalleryFolder', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage GalleryFolder', 'url'=>array('admin')),
+	array('label'=>'Powrót do galerii', 'url'=>array('/cms/gallery/view', 'id'=>$gallery->id)),
+	array('label'=>'Podląd kategorii', 'url'=>array('view', 'id'=>$model->id, 'gal'=>$gallery->id)),
+	array('label'=>'Stwórz nową kategorię', 'url'=>array('create', 'gal'=>$gallery->id)),
 );
 ?>
 
-<h1>Update GalleryFolder <?php echo $model->id; ?></h1>
+<h1>Edycja kategorii <?php echo $model->name; ?></h1>
+<h4>Kategoria z galerii "<?php echo $gallery->name; ?>"</h4>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

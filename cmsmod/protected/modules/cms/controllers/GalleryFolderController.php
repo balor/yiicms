@@ -56,8 +56,17 @@ class GalleryFolderController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
+            'gallery'=>$this->loadGal(),
 		));
 	}
+
+    private function loadGal()
+    {
+        if (!isset($_GET['gal']) || !is_numeric($_GET['gal']))
+	        $this->redirect(array('/cms/gallery/admin'));
+
+        return Gallery::model()->findByPk($_GET['gal']);
+    }
 
 	/**
 	 * Creates a new model.
@@ -67,18 +76,35 @@ class GalleryFolderController extends Controller
 	{
 		$model=new GalleryFolder;
 
+        $gallery = $this->loadGal();
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['GalleryFolder']))
 		{
 			$model->attributes=$_POST['GalleryFolder'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+            $model->gallery_id = $gallery->id;
+            $model->created = time();
+
+            $model->image=CUploadedFile::getInstance($model,'image');
+            $model->icon='galleryfolder_';
+
+			if ($model->save()) {
+                $model->icon.=$model->id;
+                $ir = new ImageResizer($model->image->tempName);
+                $opts = Yii::app()->getModule("cms")->gallery;
+                $dim = explode('x',$opts['icon_size']);
+                $ir->resizeLimitwh($dim[0],$dim[1],
+                    $opts['storage_path'].$model->icon);
+                $model->save();
+				$this->redirect(array('/cms/gallery/view','id'=>$gallery->id));
+            }
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+            'gallery'=>$gallery,
 		));
 	}
 
@@ -90,6 +116,7 @@ class GalleryFolderController extends Controller
 	{
 		$model=$this->loadModel();
 
+        $gallery = $this->loadGal();
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -102,6 +129,7 @@ class GalleryFolderController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+            'gallery'=>$gallery,
 		));
 	}
 
@@ -113,8 +141,12 @@ class GalleryFolderController extends Controller
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
+            $model = $this->loadModel();
+            $file = $model->icon;
 			// we only allow deletion via POST request
-			$this->loadModel()->delete();
+            if ($model->delete()) {
+                @unlink(Yii::app()->getModule('cms')->gallery['storage_path'].$file);
+            }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))

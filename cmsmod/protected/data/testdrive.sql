@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 17 Kwi 2010, 02:45
+-- Czas wygenerowania: 19 Kwi 2010, 21:32
 -- Wersja serwera: 5.1.45
 -- Wersja PHP: 5.3.2
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Content` (
 --
 
 INSERT INTO `Content` (`id`, `html`, `author`, `created`, `modified`, `name`) VALUES
-(2, '<p>Hej, jestem fajny</p>\r\n<p>:D<br /><span style="font-size: x-large;">:D</span>&nbsp;</p>\r\n<p style="text-align: center;"><strong><span style="font-size: large;"><span style="color: #ff0000;">CHUJ CI W DUPE</span></span></strong></p>', 'Micha¿ Thoma', 1269182366, 1271462129, 'Przyk¿adowy zasób');
+(2, '<p>Hej, jestem fajny</p>\r\n<p>:D<br /><span style="font-size: x-large;">:D</span>&nbsp;</p>\r\n<p style="text-align: center;"><strong><span style="font-size: large;"><span style="color: #ff0000;">CHUJ CI W DUPE</span></span></strong></p>', 'Michal Thoma', 1269182366, 1271462129, 'Przyklad');
 
 -- --------------------------------------------------------
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `Gallery` (
 --
 
 INSERT INTO `Gallery` (`id`, `name`, `created`) VALUES
-(1, 'Przyk¿adowa galeria', 1271457889);
+(1, 'Przykladowa galeria', 1271457889);
 
 -- --------------------------------------------------------
 
@@ -69,12 +69,15 @@ CREATE TABLE IF NOT EXISTS `GalleryFolder` (
   `icon` varchar(255) NOT NULL,
   `created` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Zrzut danych tabeli `GalleryFolder`
 --
 
+INSERT INTO `GalleryFolder` (`id`, `name`, `gallery_id`, `icon`, `created`) VALUES
+(12, 'Rooibos', 1, 'galleryfolder_12', 1271699996),
+(11, 'Yerba Mate', 1, 'galleryfolder_11', 1271699916);
 
 -- --------------------------------------------------------
 
