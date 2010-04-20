@@ -20,17 +20,21 @@ class CSimpleGalleryWidget extends CWidget
 
     public function run()
     {
+        Yii::import('application.modules.cms.models.Gallery');
+        Yii::import('application.modules.cms.models.GalleryFolder');
+        Yii::import('application.modules.cms.models.GalleryImage');
+
         if (isset($opts['in_row']) && is_numeric($opts['in_row']))
             $in_row = $opts['in_row'];
         else
             $in_row = 3;
 
-        $gallery = Gallery::model()->findByPk($this->gallery_id);
+        $gallery = Yii::createComponent('Gallery')->findByPk($this->gallery_id);
         if ($gallery == NULL)
             die('Wrong gallery id');
 
         if (isset($_GET['folder']) && is_numeric($_GET['folder'])) {
-            $folder = GalleryFolder::model()->findByPk($_GET['folder']);
+            $folder = Yii::createComponent('GalleryFolder')->findByPk($_GET['folder']);
 
             if ($folder != NULL) {
                 print '<'.$this->header_tag.'>'.$gallery->name.
@@ -45,7 +49,7 @@ class CSimpleGalleryWidget extends CWidget
                         array('view'=>$_GET['view']));
 
                 print '&laquo; '.CHtml::link('Powrót',$addr);
-                $images = GalleryImage::model()->findAll(
+                $images = Yii::createComponent('GalleryImage')->findAll(
                     'gallery_folder_id='.$folder->id);
 
                 print '<br />';
@@ -62,7 +66,7 @@ class CSimpleGalleryWidget extends CWidget
                 print 'Taki folder nie istnieje.';
         }
         else {
-            $folders = GalleryFolder::model()->findAll('gallery_id='.$this->gallery_id);
+            $folders = Yii::createComponent('GalleryFolder')->findAll('gallery_id='.$this->gallery_id);
 
             print '<'.$this->header_tag.'>'.$gallery->name.'</'.$this->header_tag.'>';
             print '<table>';
