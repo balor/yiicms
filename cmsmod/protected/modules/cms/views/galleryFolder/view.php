@@ -9,7 +9,7 @@ $this->menu=array(
 	array('label'=>'Powrót do galerii', 'url'=>array('/cms/gallery/view', 'id'=>$gallery->id)),
 	array('label'=>'Stwórz nowy katalog', 'url'=>array('create', 'gal'=>$gallery->id)),
 	array('label'=>'Edytuj katalog', 'url'=>array('update', 'id'=>$model->id, 'gal'=>$gallery->id)),
-	array('label'=>'Usuń katalog', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Czy na pewno skasować tą kategorię?')),
+	array('label'=>'Usuń katalog', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id,'gal'=>$gallery->id),'confirm'=>'Czy na pewno skasować tą kategorię?')),
 );
 ?>
 

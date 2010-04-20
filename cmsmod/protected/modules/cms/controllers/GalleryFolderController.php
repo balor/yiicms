@@ -178,8 +178,10 @@ class GalleryFolderController extends Controller
             }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
+			if (!isset($_GET['ajax'])) {
+                $gallery = $this->loadGal();
+				$this->redirect(array('/cms/gallery/view', 'id'=>$gallery->id));
+            }
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');

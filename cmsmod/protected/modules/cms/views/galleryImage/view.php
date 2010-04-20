@@ -11,7 +11,7 @@ $this->menu=array(
 	array('label'=>'Powrót do galerii', 'url'=>array('/cms/gallery/view', 'id'=>$gallery->id)),
 	array('label'=>'Dodaj nowy obrazek', 'url'=>array('/cms/galleryImage/create', 'galfol'=>$gallery_folder->id, 'gal'=>$gallery->id)),
 	array('label'=>'Edytuj obrazek', 'url'=>array('update', 'id'=>$model->id, 'galfol'=>$gallery_folder->id, 'gal'=>$gallery->id)),
-	array('label'=>'Usuń obrazek', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Czy na pewno skasować ten obrazek?')),
+	array('label'=>'Usuń obrazek', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id,'gal'=>$gallery->id,'galfol'=>$gallery_folder->id),'confirm'=>'Czy na pewno skasować ten obrazek?')),
 );
 ?>
 
