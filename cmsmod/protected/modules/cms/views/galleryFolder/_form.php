@@ -17,11 +17,16 @@
 	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'image'); ?>
+        <?php
+        if (!$model->isNewRecord)
+            echo '<span style="font-style:italic;">Pozostaw puste aby zatrzymać obecną ikonę kategorii.</span><br />';
+        ?>
 		<?php echo $form->fileField($model,'image'); ?>
 		<?php echo $form->error($model,'image'); ?>
 	</div>
 
 	<div class="row buttons">
+        <?php echo CHtml::hiddenField("gal", $gallery->id); ?>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Stwórz' : 'Zapisz'); ?>
 	</div>
 

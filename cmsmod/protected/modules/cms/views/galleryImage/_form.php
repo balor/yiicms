@@ -3,17 +3,12 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'gallery-image-form',
 	'enableAjaxValidation'=>false,
+    'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Pola oznaczone <span class="required">*</span> są wymagane</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'gallery_folder_id'); ?>
-		<?php echo $form->textField($model,'gallery_folder_id'); ?>
-		<?php echo $form->error($model,'gallery_folder_id'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
@@ -28,30 +23,14 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'image_dimensions'); ?>
-		<?php echo $form->textField($model,'image_dimensions',array('size'=>40,'maxlength'=>40)); ?>
-		<?php echo $form->error($model,'image_dimensions'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'image_size'); ?>
-		<?php echo $form->textField($model,'image_size'); ?>
-		<?php echo $form->error($model,'image_size'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'image_filename'); ?>
-		<?php echo $form->textField($model,'image_filename',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'image_filename'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'created'); ?>
-		<?php echo $form->textField($model,'created'); ?>
-		<?php echo $form->error($model,'created'); ?>
+		<?php echo $form->labelEx($model,'image'); ?>
+		<?php echo $form->fileField($model,'image'); ?>
+		<?php echo $form->error($model,'image'); ?>
 	</div>
 
 	<div class="row buttons">
+        <?php echo CHtml::hiddenField("gal", $gallery->id); ?>
+        <?php echo CHtml::hiddenField("galfol", $gallery_folder->id); ?>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 

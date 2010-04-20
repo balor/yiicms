@@ -13,6 +13,7 @@ class ImageResizer extends CComponent
     private $imagick_obj=null;
     private $img_width=0; 
     private $img_height=0; 
+    private $img_size=0;
     private $_error=""; 
      
     /**
@@ -131,6 +132,15 @@ class ImageResizer extends CComponent
             echo $this->imagick_obj;
     }
 
+    public function getImageData()
+    {
+        return array(
+            'size'=>$this->img_size,
+            'width'=>$this->img_width,
+            'height'=>$this->img_height,
+        );
+    }
+
     /** 
      * Create the image resource  
      * @access Private 
@@ -146,6 +156,7 @@ class ImageResizer extends CComponent
 
         $this->img_width = $this->imagick_obj->getImageWidth();
         $this->img_height = $this->imagick_obj->getImageHeight();
+        $this->img_size = $this->imagick_obj->getImageLength();
 
         Yii::trace(print_r(array($this->img_width, $this->img_height, $this->img_file), true),
             "application.modules.dbfs.components.DBFS");

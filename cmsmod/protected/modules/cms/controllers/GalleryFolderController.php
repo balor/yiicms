@@ -31,18 +31,18 @@ class GalleryFolderController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+			/*array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
-			),
+            ),*/
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','delete','view'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			/*array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-			),
+            ),*/
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -54,18 +54,34 @@ class GalleryFolderController extends Controller
 	 */
 	public function actionView()
 	{
+        $model = $this->loadModel();
+        $dataProvider=new CActiveDataProvider('GalleryImage', array(
+            'criteria'=>array(
+                'condition'=>'gallery_folder_id=:galfoldid',
+                'params'=>array(':galfoldid'=>$model->id),
+            ),
+            'pagination'=>array(
+                'pageSize'=>20,
+            ),
+        ));
 		$this->render('view',array(
-			'model'=>$this->loadModel(),
+			'model'=>$model,
+            'items'=>$dataProvider,
             'gallery'=>$this->loadGal(),
 		));
 	}
 
     private function loadGal()
     {
-        if (!isset($_GET['gal']) || !is_numeric($_GET['gal']))
+        $id = 0;
+        if (isset($_GET['gal']) && is_numeric($_GET['gal']))
+            $id = $_GET['gal'];
+        else if (isset($_POST['gal']) && is_numeric($_POST['gal']))
+            $id = $_POST['gal'];
+        else
 	        $this->redirect(array('/cms/gallery/admin'));
 
-        return Gallery::model()->findByPk($_GET['gal']);
+        return Gallery::model()->findByPk($id);
     }
 
 	/**
@@ -92,11 +108,13 @@ class GalleryFolderController extends Controller
 
 			if ($model->save()) {
                 $model->icon.=$model->id;
-                $ir = new ImageResizer($model->image->tempName);
-                $opts = Yii::app()->getModule("cms")->gallery;
-                $dim = explode('x',$opts['icon_size']);
-                $ir->resizeLimitwh($dim[0],$dim[1],
-                    $opts['storage_path'].$model->icon);
+                if ($model->image!=NULL) {
+                    $ir = new ImageResizer($model->image->tempName);
+                    $opts = Yii::app()->getModule("cms")->gallery;
+                    $dim = explode('x',$opts['icon_size']);
+                    $ir->resizeLimitwh($dim[0],$dim[1],
+                        $opts['storage_path'].$model->icon);
+                }
                 $model->save();
 				$this->redirect(array('/cms/gallery/view','id'=>$gallery->id));
             }
@@ -123,8 +141,19 @@ class GalleryFolderController extends Controller
 		if(isset($_POST['GalleryFolder']))
 		{
 			$model->attributes=$_POST['GalleryFolder'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+            $model->image = CUploadedFile::getInstance($model,'image');
+
+			if ($model->save()) {
+                if ($model->image!=NULL) {
+                    $ir = new ImageResizer($model->image->tempName);
+                    $opts = Yii::app()->getModule("cms")->gallery;
+                    $dim = explode('x',$opts['icon_size']);
+                    @unlink($opts['storage_path'].$model->icon);
+                    $ir->resizeLimitwh($dim[0],$dim[1],
+                        $opts['storage_path'].$model->icon);
+                } 
+				$this->redirect(array('view','id'=>$model->id, 'gal'=>$gallery->id));
+            }
 		}
 
 		$this->render('update',array(
@@ -145,7 +174,7 @@ class GalleryFolderController extends Controller
             $file = $model->icon;
 			// we only allow deletion via POST request
             if ($model->delete()) {
-                @unlink(Yii::app()->getModule('cms')->gallery['storage_path'].$file);
+                @unlink(Yii::app()->getmodule('cms')->gallery['storage_path'].$file);
             }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

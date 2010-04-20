@@ -67,7 +67,7 @@ class GalleryFolder extends CActiveRecord
 	{
 		return array(
 			'id' => 'Nr',
-			'name' => 'Nazwa kategorii',
+			'name' => 'Nazwa katalogu',
 			'gallery_id' => 'Gallery',
 			'icon' => 'Ikona',
 			'created' => 'Utworzono',

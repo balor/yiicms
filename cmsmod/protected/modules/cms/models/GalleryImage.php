@@ -14,6 +14,8 @@ class GalleryImage extends CActiveRecord
 	 * @var integer $created
 	 */
 
+    public $image;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return CActiveRecord the static model class
@@ -46,6 +48,7 @@ class GalleryImage extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, gallery_folder_id, name, author, image_dimensions, image_size, image_filename, created', 'safe', 'on'=>'search'),
+            array('image', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true),
 		);
 	}
 
@@ -66,14 +69,15 @@ class GalleryImage extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
+			'id' => 'Nr',
 			'gallery_folder_id' => 'Gallery Folder',
-			'name' => 'Name',
-			'author' => 'Author',
-			'image_dimensions' => 'Image Dimensions',
-			'image_size' => 'Image Size',
-			'image_filename' => 'Image Filename',
-			'created' => 'Created',
+			'name' => 'Tytuł obrazka',
+			'author' => 'Autor',
+			'image_dimensions' => 'Rozmiary obrazka',
+			'image_size' => 'Rozmiar pliku',
+			'image_filename' => 'Nazwa pliku',
+            'image' => 'Obrazek',
+			'created' => 'Utworzono',
 		);
 	}
 

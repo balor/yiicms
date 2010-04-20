@@ -3,14 +3,29 @@ $this->pageTitle=Yii::app()->name . ' - About';
 $this->breadcrumbs=array(
 	'Example',
 );
-$content = Yii::app()->getModule('cms')->getContent(2);
 ?>
 
-<h1><?php echo $content['name']; ?></h1>
+<?php // Example of CMS usage (module CONTENT and GALLERY) ?>
 
-<?php echo $content['html']; ?>
+<?php
+Yii::app()->getModule('cms')->getContent(2, 'content', array('render'=>true, 'header_tag'=>'h2'));
+?>
 
-<div style="border:1px solid #999;padding:5px;margin:10px 0px;">
-Tekst napisany przez <?php echo $content['author']; ?> dnia <?php echo date("Y.m.d", $content['created']); ?>.<br />
-Ostatnia aktualizacja odbyła się <?php echo date("Y.m.d H:i", $content['modified']); ?>.<br />
-</div>
+<?php
+$this->widget(
+    'application.modules.cms.extensions.simpleGallery.CSimpleGalleryWidget', 
+    array(
+        'gallery_id'=>1,
+        'header_tag'=>'h3',
+        'gallery_container_id'=>'my_gallery',
+        'current_page'=>array('/site/page',array('view'=>'about')),
+        'folders'=>array(
+            'in_row'=>1,
+        ),
+        'images'=>array(
+            'in_row'=>3,
+        ),
+    )
+);
+?>
+
