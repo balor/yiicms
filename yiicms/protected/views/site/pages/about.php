@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 <?php // Example of CMS usage (module CONTENT and GALLERY) ?>
 
 <?php
-Yii::app()->getModule('cms')->getContent(2, 'content', array('render'=>true, 'header_tag'=>'h2'));
+Yii::app()->getModule('cms')->getContent(2, array('render'=>true, 'header_tag'=>'h2'));
 ?>
 
 <?php

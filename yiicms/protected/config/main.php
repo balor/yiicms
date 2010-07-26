@@ -23,7 +23,8 @@ return array(
         'cms'=>array(
             'submodules'=>array(
                 'content',
-                'gallery'
+                'gallery',
+                'taksonomy',
             ),
             'content'=>array(
                 'use_editor'=>true,

@@ -14,6 +14,14 @@ $assdir = Yii::app()->getModule('cms')->assets;
             array('class'=>'main_link'));?>
     </li>
 <?php } ?>
+<?php if (Yii::app()->getModule('cms')->submoduleLoaded('taksonomy')) { ?>
+    <li>
+        <?php echo CHtml::image($assdir.'/folder_page.png','Zarządzaj taksonomią'); ?>
+        <?php echo CHtml::link('Zarządzaj taksonomią',
+            $this->createUrl('/cms/taksonomy/admin'),
+            array('class'=>'main_link'));?>
+    </li>
+<?php } ?>
 <?php if (Yii::app()->getModule('cms')->submoduleLoaded('gallery')) { ?>
     <li>
         <?php echo CHtml::image($assdir.'/image.png','Zarządzaj galeriami'); ?>

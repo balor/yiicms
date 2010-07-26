@@ -1,22 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.1
+-- version 3.3.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 20 Kwi 2010, 10:48
--- Wersja serwera: 5.1.45
--- Wersja PHP: 5.3.2
+-- Generation Time: Jul 26, 2010 at 12:29 PM
+-- Server version: 5.1.47
+-- PHP Version: 5.3.2
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Baza danych: `balor_cmsmod`
+-- Database: `balor_yiicms`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla  `Content`
+-- Table structure for table `Content`
 --
 
 CREATE TABLE IF NOT EXISTS `Content` (
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `Content` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Zrzut danych tabeli `Content`
+-- Dumping data for table `Content`
 --
 
 INSERT INTO `Content` (`id`, `html`, `author`, `created`, `modified`, `name`) VALUES
@@ -39,7 +39,7 @@ INSERT INTO `Content` (`id`, `html`, `author`, `created`, `modified`, `name`) VA
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla  `Gallery`
+-- Table structure for table `Gallery`
 --
 
 CREATE TABLE IF NOT EXISTS `Gallery` (
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `Gallery` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Zrzut danych tabeli `Gallery`
+-- Dumping data for table `Gallery`
 --
 
 INSERT INTO `Gallery` (`id`, `name`, `created`) VALUES
@@ -59,7 +59,7 @@ INSERT INTO `Gallery` (`id`, `name`, `created`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla  `GalleryFolder`
+-- Table structure for table `GalleryFolder`
 --
 
 CREATE TABLE IF NOT EXISTS `GalleryFolder` (
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `GalleryFolder` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
--- Zrzut danych tabeli `GalleryFolder`
+-- Dumping data for table `GalleryFolder`
 --
 
 INSERT INTO `GalleryFolder` (`id`, `name`, `gallery_id`, `icon`, `created`) VALUES
@@ -82,7 +82,7 @@ INSERT INTO `GalleryFolder` (`id`, `name`, `gallery_id`, `icon`, `created`) VALU
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla  `GalleryImage`
+-- Table structure for table `GalleryImage`
 --
 
 CREATE TABLE IF NOT EXISTS `GalleryImage` (
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `GalleryImage` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
--- Zrzut danych tabeli `GalleryImage`
+-- Dumping data for table `GalleryImage`
 --
 
 INSERT INTO `GalleryImage` (`id`, `gallery_folder_id`, `name`, `author`, `image_dimensions`, `image_size`, `image_filename`, `created`) VALUES
@@ -114,7 +114,29 @@ INSERT INTO `GalleryImage` (`id`, `gallery_folder_id`, `name`, `author`, `image_
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla  `User`
+-- Table structure for table `Taksonomy`
+--
+
+CREATE TABLE IF NOT EXISTS `Taksonomy` (
+  `id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `parent_id` int(5) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `Taksonomy`
+--
+
+INSERT INTO `Taksonomy` (`id`, `name`, `parent_id`) VALUES
+(1, 'Moje yerby', 0),
+(2, 'Charakterystyka', 1),
+(3, 'Zastosowanie', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `User`
 --
 
 CREATE TABLE IF NOT EXISTS `User` (
@@ -127,10 +149,9 @@ CREATE TABLE IF NOT EXISTS `User` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Zrzut danych tabeli `User`
+-- Dumping data for table `User`
 --
 
 INSERT INTO `User` (`id`, `email`, `password`, `last_login_time`, `registration_time`) VALUES
 (1, 'admin', '1fcdc7a5d2761799a5b301aba096e636', 0, 1269086287),
 (2, 'michal@balor.pl', 'b2b45efb5e1e7ecbba229d9f0934cfa7', 0, 1269181785);
-

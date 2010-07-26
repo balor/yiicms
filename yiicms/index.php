@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Europe/Berlin');
 
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../framework/yii.php';

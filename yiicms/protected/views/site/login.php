@@ -10,7 +10,6 @@ $this->breadcrumbs=array(
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
-    'action'=>'/yiicms/index.php?r=site/login',
 	'enableAjaxValidation'=>true,
 )); ?>
 
