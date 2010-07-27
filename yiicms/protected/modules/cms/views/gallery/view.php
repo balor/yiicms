@@ -31,7 +31,12 @@ $this->menu=array(
 <br />
 <h3>Katalogi w galerii "<?php echo $model->name; ?>"</h3>
 
-<?php echo CHtml::link("+ Stwórz nowy katalog", $this->createUrl("/cms/galleryFolder/create", array('gal'=>$model->id)), array('class'=>'add_link')); ?>
+<?php
+echo CHtml::link("+ Stwórz nowy katalog",
+    $this->createUrl("/cms/galleryFolder/create", 
+    array('gal'=>$model->id)),
+    array('class'=>'add_link'));
+?>
 <br />
 <br />
 <?php $this->widget('zii.widgets.grid.CGridView', array(

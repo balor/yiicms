@@ -39,7 +39,10 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		'id',
 		'name',
-		'parent_id',
+		array(
+            'name'=>'parent_id',
+            'value'=>'$data->parent_name',
+        ),
 		array(
             'header'=>'Operacje',
 			'class'=>'CButtonColumn',

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2010 at 12:29 PM
+-- Generation Time: Jul 27, 2010 at 12:20 PM
 -- Server version: 5.1.47
 -- PHP Version: 5.3.2
 
@@ -132,6 +132,25 @@ INSERT INTO `Taksonomy` (`id`, `name`, `parent_id`) VALUES
 (1, 'Moje yerby', 0),
 (2, 'Charakterystyka', 1),
 (3, 'Zastosowanie', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TaksonomyLinker`
+--
+
+CREATE TABLE IF NOT EXISTS `TaksonomyLinker` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `taksonomy_id` int(5) unsigned NOT NULL,
+  `content_id` int(10) unsigned NOT NULL,
+  `content_model` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `TaksonomyLinker`
+--
+
 
 -- --------------------------------------------------------
 

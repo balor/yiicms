@@ -1,8 +1,9 @@
 <?php
 $this->breadcrumbs=array(
-	'Taksonomys'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	'Panel administracyjny'=>array('/cms/default/index'),
+	'Zarządzanie taksonomią strony'=>array('/cms/taksonomy/admin'),
+	'Kategoria '.$model->name=>array('view','id'=>$model->id),
+	'Edycja modelu',
 );
 
 $this->menu=array(

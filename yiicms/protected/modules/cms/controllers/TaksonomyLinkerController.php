@@ -1,6 +1,6 @@
 <?php
 
-class TaksonomyController extends Controller
+class TaksonomyLinkerController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to 'column2', meaning
@@ -32,15 +32,15 @@ class TaksonomyController extends Controller
 	{
 		return array(
 			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),*/
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('view','create','update','admin','delete'),
+				'actions'=>array('create','update','delete','admin','view'),
 				'users'=>array('@'),
 			),
 			/*array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin'),
+				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
 			),*/
 			array('deny',  // deny all users
@@ -54,11 +54,8 @@ class TaksonomyController extends Controller
 	 */
 	public function actionView()
 	{
-        $model = $this->loadModel();
-        $contents = TaksonomyLinker::model()->findAll();
 		$this->render('view',array(
-			'model'=>$model,
-            'contents'=>$contents,
+			'model'=>$this->loadModel(),
 		));
 	}
 
@@ -68,21 +65,23 @@ class TaksonomyController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Taksonomy;
+		$model=new TaksonomyLinker;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Taksonomy']))
+		if(isset($_POST['TaksonomyLinker']))
 		{
-			$model->attributes=$_POST['Taksonomy'];
+			$model->attributes=$_POST['TaksonomyLinker'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array(strtolower($model->content_model).'/view','id'=>$model->content_id));
 		}
+
+        $model->content_id = $_GET['content_id'];
+        $model->content_model = $_GET['content_model'];
 
 		$this->render('create',array(
 			'model'=>$model,
-            'categories'=>$this->getAllCategories($model),
 		));
 	}
 
@@ -97,16 +96,15 @@ class TaksonomyController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Taksonomy']))
+		if(isset($_POST['TaksonomyLinker']))
 		{
-			$model->attributes=$_POST['Taksonomy'];
+			$model->attributes=$_POST['TaksonomyLinker'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
-            'categories'=>$this->getAllCategories($model),
 		));
 	}
 
@@ -116,14 +114,18 @@ class TaksonomyController extends Controller
 	 */
 	public function actionDelete()
 	{
-		if(Yii::app()->request->isPostRequest)
+		if (Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadModel()->delete();
+			$model = $this->loadModel();
+            //$url = '/cms/'.strtolower($model->content_model).'/view';
+            //$param = $model->content_id;
+            $model->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
+                $this->redirect($_SERVER['HTTP_REFERER']);
+				//$this->redirect(array($url,'id'=>$param));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -134,7 +136,7 @@ class TaksonomyController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Taksonomy');
+		$dataProvider=new CActiveDataProvider('TaksonomyLinker');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -145,13 +147,12 @@ class TaksonomyController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Taksonomy('search');
-		if(isset($_GET['Taksonomy']))
-			$model->attributes=$_GET['Taksonomy'];
+		$model=new TaksonomyLinker('search');
+		if(isset($_GET['TaksonomyLinker']))
+			$model->attributes=$_GET['TaksonomyLinker'];
 
 		$this->render('admin',array(
 			'model'=>$model,
-            'categories'=>$this->getAllCategories(),
 		));
 	}
 
@@ -164,7 +165,7 @@ class TaksonomyController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Taksonomy::model()->findbyPk($_GET['id']);
+				$this->_model=TaksonomyLinker::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -177,21 +178,10 @@ class TaksonomyController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='taksonomy-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='taksonomy-linker-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-
-    private function getAllCategories($categoryToExclude = null)
-    {
-        $allCategories = Taksonomy::model()->findAll();
-        $categories = array(0=>'Kategoria główna');
-        foreach ($allCategories as $category) {
-            if (!$categoryToExclude || $categoryToExclude->id != $category->id)
-                $categories[$category->id] = $category->name;
-        }
-        return $categories;
-    }
 }

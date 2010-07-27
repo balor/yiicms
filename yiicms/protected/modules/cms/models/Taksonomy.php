@@ -9,6 +9,9 @@ class Taksonomy extends CActiveRecord
 	 * @var integer $parent_id
 	 */
 
+    public $parent_name;
+    private $linkers;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return CActiveRecord the static model class
@@ -81,10 +84,27 @@ class Taksonomy extends CActiveRecord
 
 		$criteria->compare('name',$this->name,true);
 
-		$criteria->compare('parent_id',$this->parent_id);
+		//$criteria->compare('parent_id',$this->parent_id);
 
 		return new CActiveDataProvider('Taksonomy', array(
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function afterFind()
+    {
+        $parent = self::model()->findByPk($this->parent_id);
+        if ($parent)
+            $this->parent_name = $parent->name;
+        else
+            $this->parent_name = "Kategoria główna";
+    }
+
+    public function getLinkers()
+    {
+        if (!$this->linkers)
+            $this->linkers = TaksonomyLinker::model()->findAll(
+                array('taksonomy_id'=>$this->id));
+        return $this->linkers;
+    }
 }

@@ -99,4 +99,9 @@ class Content extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function getContaingingCategories()
+    {
+        return TaksonomyLinker::model()->findAll(array('content_id'=>$this->id));
+    }
 }

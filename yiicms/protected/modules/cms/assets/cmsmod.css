@@ -31,3 +31,6 @@
     text-decoration:none;
 }
 
+a img {
+    margin-bottom: -2px;
+}
