@@ -5,24 +5,19 @@
  * Version: 1.0
  */
 
-class CSimpleGalleryWidget extends CWidget
+class CTaksonomyMenuWidget extends CWidget
 {
-    public $gallery_id;
-    public $header_tag = 'h1';
-    public $gallery_container_id = 'yiicms_gallery_view';
-    public $current_page;
-    public $folders = array(
-        'in_row'=>3,
-    );
-    public $images = array(
-        'in_row'=>3,
-    );
+    public $taksonomy_id;
+    public $recursive = true;
+    public $show_contents = true;
+    public $menu_container_id = 'yiicms_taksonomymenu';
 
+    //todo: all stuff below is an old simpleGalleryWidget...
     public function run()
     {
-        Yii::import('application.modules.cms.models.Gallery');
-        Yii::import('application.modules.cms.models.GalleryFolder');
-        Yii::import('application.modules.cms.models.GalleryImage');
+        Yii::import('application.modules.cms.models.Taksonomy');
+        Yii::import('application.modules.cms.models.TaksonomyLinker');
+        Yii::import('application.modules.cms.models.Content');
 
         if (isset($opts['in_row']) && is_numeric($opts['in_row']))
             $in_row = $opts['in_row'];
@@ -55,7 +50,7 @@ class CSimpleGalleryWidget extends CWidget
                 print '<br />';
 
                 $this->owner->widget(
-                    'application.modules.cms.extensions.jqueryImgBox.CJQueryImgBoxWidget', 
+                    'application.modules.cms.extensions.querybox.CQueryboxWidget', 
                     array(
                         'yiicms_images' => $images,
                         'in_row' => $this->images['in_row'],

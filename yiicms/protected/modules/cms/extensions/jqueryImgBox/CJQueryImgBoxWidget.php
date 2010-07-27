@@ -5,7 +5,7 @@
  * Version: 1.0
  */
 
-class CQueryboxWidget extends CWidget
+class CJQueryImgBoxWidget extends CWidget
 {
     /*
      * Array of manual image data
@@ -32,7 +32,7 @@ class CQueryboxWidget extends CWidget
     /*
      * ID of an image html container
      */
-    public $gallery_object_id = 'querybox-gallery';
+    public $gallery_object_id = 'jqueryimgbox-gallery';
 
     /*
      * Item count in table row when more than one image is passed

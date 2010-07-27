@@ -47,7 +47,7 @@ $this->menu=array(
 )); 
 echo '<br /><br /><h4>Podgląd (kliknij by obejżeć pełną wersję obrazka):</h4>';
 $this->widget(
-    'application.modules.cms.extensions.querybox.CQueryboxWidget', 
+    'application.modules.cms.extensions.jqueryImgBox.CJQueryImgBoxWidget', 
     array(
         'yiicms_images' => array($model),
     )
