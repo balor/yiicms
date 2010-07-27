@@ -23,6 +23,7 @@
 	</div>
 
 	<div class="row buttons">
+        <?php echo CHtml::activeHiddenField($model,'id'); ?>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Stwórz' : 'Zapisz'); ?>
 	</div>
 

@@ -118,7 +118,7 @@ class TaksonomyLinker extends CActiveRecord
     {
         switch ($this->content_model) {
             case 'Content':
-                return 'Zawartość (strona html)';
+                return 'Zawartość html';
                 break;
         }
         return 'Niezdefiniowano';

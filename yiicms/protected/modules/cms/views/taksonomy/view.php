@@ -30,10 +30,10 @@ foreach ($taksonomyLinkers as $link) {
     $c = $link->getContent();
     print '<li>'.
 
-        CHtml::link($c->name.' ['.$link->getContentName().'] ', array(
+        CHtml::link($c->name.' ['.$link->getContentName().']', array(
             '/cms/'.strtolower($link->content_model).'/view',
             'id'=>$link->content_id
-        )).
+        )).' '.
             
         CHtml::linkButton(CHtml::image($assdir.'/delete.png', 'Usuń przyporządkowanie'), array(
             'submit'=>array('taksonomyLinker/delete', 'id'=>$link->id),

@@ -11,6 +11,7 @@ class Taksonomy extends CActiveRecord
 
     public $parent_name;
     private $linkers;
+    private $children;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -104,7 +105,33 @@ class Taksonomy extends CActiveRecord
     {
         if (!$this->linkers)
             $this->linkers = TaksonomyLinker::model()->findAll(
-                array('taksonomy_id'=>$this->id));
+                'taksonomy_id = '.$this->id);
         return $this->linkers;
+    }
+
+    public function getChildren()
+    {
+        if (!$this->children)
+            $this->children = Taksonomy::model()->findAll('parent_id = '.$this->id);
+
+        return $this->children;
+    }
+
+    protected function beforeDelete()
+    {
+        if (!parent::beforeDelete())
+            return false;
+
+        $links = $this->getLinkers();
+        foreach ($links as $link) {
+            $link->delete();
+        }
+
+        $children = $this->getChildren();
+        foreach ($children as $child) {
+            $child->delete();
+        }
+
+        return true;
     }
 }

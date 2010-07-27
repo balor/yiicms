@@ -1,7 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Zasoby'=>array('index'),
-	$model->id,
+	'Panel administracyjny'=>array('/cms/default/index'),
+	'Zarządzaj zasobami'=>array('index'),
+	$model->name,
 );
 $assdir = Yii::app()->getModule('cms')->assets;
 

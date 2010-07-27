@@ -6,8 +6,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List TaksonomyLinker', 'url'=>array('index')),
-	array('label'=>'Manage TaksonomyLinker', 'url'=>array('admin')),
+	array('label'=>'Powrót do "'.$model->getContent()->name.'"',
+        'url'=>array('/cms/content/view','id'=>$model->getContent()->id)),
 );
 ?>
 

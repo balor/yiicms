@@ -1,4 +1,4 @@
-<?php
+ <?php
 $this->breadcrumbs=array(
 	'Gallery Folders',
 );

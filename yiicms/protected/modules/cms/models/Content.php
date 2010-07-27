@@ -100,8 +100,21 @@ class Content extends CActiveRecord
 		));
 	}
 
+    protected function beforeDelete()
+    {
+        if (!parent::beforeDelete())
+            return false;
+
+        $links = $this->getContaingingCategories();
+        foreach ($links as $link) {
+            $link->delete();
+        }
+
+        return true;
+    }
+
     public function getContaingingCategories()
     {
-        return TaksonomyLinker::model()->findAll(array('content_id'=>$this->id));
+        return TaksonomyLinker::model()->findAll('content_id = '.$this->id);
     }
 }

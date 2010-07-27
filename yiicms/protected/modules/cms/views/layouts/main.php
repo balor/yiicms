@@ -32,12 +32,9 @@
 			'items'=>array(
 				array('label'=>'Panel administracyjny', 'url'=>array('/cms/default/index')),
 				array('label'=>'Zawartość', 'url'=>array('/cms/content/admin')),
+				array('label'=>'Taksonomia', 'url'=>array('/cms/taksonomy/admin')),
 				array('label'=>'Galerie', 'url'=>array('/cms/gallery/admin')),
 				array('label'=>'Użytkownicy', 'url'=>array('/user/admin')),
-				//array('label'=>'Example', 'url'=>array('/site/page', 'view'=>'about')),
-                /*array('label'=>'Contact', 'url'=>array('/site/contact')),*/
-                //array('label'=>'Zaloguj się', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				//array('label'=>'Wyloguj ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div>

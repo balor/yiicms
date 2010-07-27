@@ -56,7 +56,7 @@ $this->widget('zii.widgets.CDetailView', array(
             'value'=>'(round($data->image_size/1000,2)."k")',
         ),
         array(
-            'name'=>'image_filename',
+            'header'=>'Obrazek',
             'type'=>'raw',
             'value'=>'CHtml::image(Yii::app()->createUrl("/cms/gallery/getImage", array("f"=>$data->image_filename.\'_t\')),$data->name)',
         ),
