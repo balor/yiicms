@@ -5,7 +5,7 @@
  * Version: 1.0
  */
 
-class CJQueryImgBoxWidget extends CWidget
+class CJLightBoxWidget extends CWidget
 {
     /*
      * Array of manual image data

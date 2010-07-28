@@ -31,7 +31,8 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'Example', 'url'=>array('/site/page', 'view'=>'about')),
+				array('label'=>'Example 1', 'url'=>array('/site/page', 'view'=>'example_manual')),
+				array('label'=>'Example 2', 'url'=>array('/site/page', 'view'=>'example_taksonomy')),
                 /*array('label'=>'Contact', 'url'=>array('/site/contact')),*/
                 array('label'=>'Zaloguj się', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				//array('label'=>'Wyloguj ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

@@ -1,17 +1,17 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - About';
+$this->pageTitle=Yii::app()->name . ' - Example 1';
 $this->breadcrumbs=array(
-	'Example',
+	'Example 1',
 );
 ?>
 
-<?php // Example of CMS usage (module CONTENT and GALLERY) ?>
-
 <?php
+// Example of manual content distribution
 Yii::app()->getModule('cms')->getContent(2, array('render'=>true, 'header_tag'=>'h2'));
 ?>
 
 <?php
+// Example of using CSimpleGalleryWidget to render gallery
 $this->widget(
     'application.modules.cms.extensions.simpleGallery.CSimpleGalleryWidget', 
     array(
