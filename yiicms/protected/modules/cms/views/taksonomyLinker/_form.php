@@ -16,12 +16,8 @@
 	</div>
 
 	<div class="row">
-        <strong>Zawartość:</strong> <?php echo $model->getContent()->name; ?>
-        <?php echo CHtml::activeHiddenField($model, 'content_id'); ?>
-	</div>
-	<div class="row">
-        <strong>Typ zawartości:</strong> <?php echo $model->getContentName(); ?>
-        <?php echo CHtml::activeHiddenField($model, 'content_model'); ?>
+        <strong>Zawartość:</strong> <?php echo $model->content->name; ?>
+        <?php echo CHtml::activeHiddenField($model, 'content_id', array('value'=>$model->content->id)); ?>
 	</div>
 
 	<div class="row buttons">

@@ -7,10 +7,8 @@ class TaksonomyLinker extends CActiveRecord
 	 * @var integer $id
 	 * @var integer $taksonomy_id
 	 * @var integer $content_id
-	 * @var string $content_model
 	 */
 
-    private $content;
     private $category;
 
 	/**
@@ -38,12 +36,11 @@ class TaksonomyLinker extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('taksonomy_id, content_id, content_model', 'required'),
+			array('taksonomy_id, content_id', 'required'),
 			array('taksonomy_id, content_id', 'numerical', 'integerOnly'=>true),
-			array('content_model', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, taksonomy_id, content_id, content_model', 'safe', 'on'=>'search'),
+			array('id, taksonomy_id, content_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,9 +49,12 @@ class TaksonomyLinker extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
+            'content'=>array(
+                self::BELONGS_TO,
+                'Content',
+                'content_id',
+            )
 		);
 	}
 
@@ -67,7 +67,6 @@ class TaksonomyLinker extends CActiveRecord
 			'id' => 'Nr',
 			'taksonomy_id' => 'Kategoria',
 			'content_id' => 'Zawartość',
-			'content_model' => 'Typ zawartości',
 		);
 	}
 
@@ -88,24 +87,10 @@ class TaksonomyLinker extends CActiveRecord
 
 		$criteria->compare('content_id',$this->content_id);
 
-		$criteria->compare('content_model',$this->content_model,true);
-
 		return new CActiveDataProvider('TaksonomyLinker', array(
 			'criteria'=>$criteria,
 		));
 	}
-
-    public function getContent()
-    {
-        if (!$this->content) {
-            switch ($this->content_model) {
-                case 'Content':
-                    $this->content = Content::model()->findByPk($this->content_id);
-                    break;
-            }
-        }
-        return $this->content;
-    }
 
     public function getCategory()
     {
@@ -114,27 +99,18 @@ class TaksonomyLinker extends CActiveRecord
         return $this->category;
     }
 
-    public function getContentName()
-    {
-        switch ($this->content_model) {
-            case 'Content':
-                return 'Zawartość html';
-                break;
-        }
-        return 'Niezdefiniowano';
-    }
-
     public function getAllCategories()
     {
         $allCategories = Taksonomy::model()->findAll();
-        $content = $this->getContent();
+        $content = $this->content;
         $contentCategories = $content->getContaingingCategories();
         $categories = array();
         foreach ($allCategories as $category) {
             $validCategory = true;
             foreach ($contentCategories as $contentCategory) {
-                if ($contentCategory->id == $category->id)
+                if ($contentCategory->taksonomy_id == $category->id) {
                     $validCategory = false;
+                }
             }
             if ($validCategory)
                 $categories[$category->id] = $category->name;

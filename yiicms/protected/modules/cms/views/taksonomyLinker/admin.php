@@ -45,7 +45,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'taksonomy_id',
 		'content_id',
-		'content_model',
 		array(
 			'class'=>'CButtonColumn',
 		),

@@ -11,6 +11,7 @@ class Taksonomy extends CActiveRecord
 
     public $parent_name;
     private $linkers;
+    private $contents = array();
     private $children;
 
 	/**
@@ -107,6 +108,17 @@ class Taksonomy extends CActiveRecord
             $this->linkers = TaksonomyLinker::model()->findAll(
                 'taksonomy_id = '.$this->id);
         return $this->linkers;
+    }
+
+    public function getContents()
+    {
+        if (empty($this->contents)) {
+            $linkers = $this->getLinkers();
+            foreach ($linkers as $linker){
+                $this->contents[] = $linker->content;
+            }
+        }
+        return $this->contents;
     }
 
     public function getChildren()

@@ -21,6 +21,5 @@ $this->menu=array(
 		'id',
 		'taksonomy_id',
 		'content_id',
-		'content_model',
 	),
 )); ?>

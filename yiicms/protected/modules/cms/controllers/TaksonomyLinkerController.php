@@ -74,11 +74,10 @@ class TaksonomyLinkerController extends Controller
 		{
 			$model->attributes=$_POST['TaksonomyLinker'];
 			if($model->save())
-				$this->redirect(array(strtolower($model->content_model).'/view','id'=>$model->content_id));
+				$this->redirect(array('/cms/content/view','id'=>$model->content_id));
 		}
 
-        $model->content_id = $_GET['content_id'];
-        $model->content_model = $_GET['content_model'];
+        $model->content = Content::model()->findByPk($_GET['content_id']);
 
 		$this->render('create',array(
 			'model'=>$model,

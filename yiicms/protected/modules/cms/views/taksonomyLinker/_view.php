@@ -12,9 +12,4 @@
 	<?php echo CHtml::encode($data->content_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('content_model')); ?>:</b>
-	<?php echo CHtml::encode($data->content_model); ?>
-	<br />
-
-
 </div>

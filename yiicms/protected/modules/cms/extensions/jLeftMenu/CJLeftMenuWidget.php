@@ -1,16 +1,39 @@
 <?php
 
 /*
- * Author: Michał [balor] Thoma
+ * Author: Michał [Balor] Thoma
+ * Author website: http://balor.pl
  * Version: 1.0
  */
 
 class CJLeftMenuWidget extends CWidget
 {
+    // REQUIRED PARAMETER
+    // this is a root taksonomy that will be used to build menu
     public $taksonomy_id = 0;
+
+    // if set to false, only given taksonomy and its contents/children will be rendered 
     public $recursive = true;
+
+    // if set to false, menu will only contain categories
     public $show_contents = true;
+
+    // if set to true, all categories will be links with taskonomy->id param
+    public $clickable_cats = false;
+
+    // main <ul> object id param
     public $menu_container_id = 'yiicms_jleftmenu';
+    
+    // content link action described as array('/action', 'param'=>'value')
+    // applied if $show_contents = true
+    public $content_action = array('');
+
+    // category link action described as array('/action', 'param'=>'value')
+    // applied id $clickable_cats = true
+    public $category_action = array('');
+
+    public $taksonomy_param_name = 'taksonomy_id';
+    public $content_param_name = 'content_id';
 
     public function run()
     {
@@ -41,38 +64,71 @@ class CJLeftMenuWidget extends CWidget
 
     private function buildTaksonomyTree($rootTaksonomy, $first = true)
     {
+        $empty_action = 'javascript:void(0);';
+        $breakker = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         $children = $rootTaksonomy->getChildren();
-        if (!$children)
-            return false;
-
+        
         if ($first)
             $tree = "\n".'<ul id="'.$this->menu_container_id.'" class="menu">'."\n";
         else
             $tree = '';
-        //else
-        //    $tree = "\n".'<ul>'."\n";
 
         foreach ($children as $child) {
-            $subTree = $this->buildTaksonomyTree($child, false);
+            
+            if ($this->recursive)
+                $subTree = $this->buildTaksonomyTree($child, false);
+            else
+                $subTree = false;
+            
+            $category_action = $this->category_action;
+            $category_action[$this->taksonomy_param_name] = $child->id;
+            $categoryLink = $child->name;
+            if ($this->clickable_cats)
+                $categoryLink = CHtml::link($child->name, $category_action);
+            
             if ($subTree == false) {
-                $tree .= '<li>'."\n".
-                    "\t".'<a href="javascript:void(0);" childid="c_'.$child->id.'" class="product">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>'."\n".
-                    "\t".'<a href="javascript:void(0);">'.$child->name.'</a>'."\n".
-                    '</li>'."\n";
+                $tree .= 
+                    '<li>'.
+                        CHtml::link($breakker, $empty_action, array(
+                            'childid'=>'c_'.$child->id,
+                            'class'=>'product',
+                        )).
+                        $categoryLink.
+                    '</li>';
             }
             else {
                 $tree .= 
-                    '<li>'."\n".
-                    "\t".'<a href="javascript:void(0);" childid="c_'.$child->id.'" class="cat_close category">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>'."\n".
-                    "\t".'<a href="javascript:void(0);">'.$child->name.'</a>'."\n".
-                    '</li>'."\n".
-                    '<ul id="c_'.$child->id.'">'."\n".
-                    $subTree.
-                    '</ul>'."\n";
+                    '<li>'.
+                        CHtml::link($breakker, $empty_action, array(
+                            'childid'=>'c_'.$child->id,
+                            'class'=>'cat_close category',
+                        )).
+                        $categoryLink.
+                    '</li>'.
+                    '<ul id="c_'.$child->id.'">'.
+                        $subTree.
+                    '</ul>';
+            }
+        }
+        if ($this->show_contents) {
+            $contents = $rootTaksonomy->getContents();
+            foreach ($contents as $content) {
+                $content_action = $this->content_action;
+                $content_action[$this->content_param_name] = $content->id;
+                $tree .= 
+                    '<li>'.
+                        CHtml::link($breakker, $empty_action, array(
+                            'childid'=>'con_'.$content->id,
+                            'class'=>'product',
+                        )).
+                        CHtml::link($content->name, $content_action). 
+                   '</li>'; 
             }
         }
         if ($first)
             $tree .= '</ul>'."\n";
+        if ($tree == '')
+            return false;
         return $tree;
     }
 }

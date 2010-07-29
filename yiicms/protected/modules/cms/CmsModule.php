@@ -63,7 +63,7 @@ class CmsModule extends CWebModule
                         'Zalogowany jako <strong>'.Yii::app()->user->name.'</strong>. '.
                         CHtml::link('Otwórz panel administracyjny', 
                             Yii::app()->createUrl('/cms/default/index')).' | '.
-                        CHtml::link('Wyloguj się', Yii::app()->createUrl('/site/logout')).
+                        CHtml::link(CHtml::image($this->assets.'/door_in.png').' Wloguj się', Yii::app()->createUrl('/site/logout')).
                 '</div>';
         }
         return '';

@@ -27,11 +27,11 @@ $this->menu=array(
 <?php
 $taksonomyLinkers = $model->getLinkers();
 foreach ($taksonomyLinkers as $link) {
-    $c = $link->getContent();
+    $c = $link->content;
     print '<li>'.
 
-        CHtml::link($c->name.' ['.$link->getContentName().']', array(
-            '/cms/'.strtolower($link->content_model).'/view',
+        CHtml::link($c->name, array(
+            '/cms/content/view',
             'id'=>$link->content_id
         )).' '.
             

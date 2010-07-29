@@ -1,33 +1,10 @@
 @charset "utf-8";
-/* CSS Document */
-body {
-    margin: 0;
-    padding: 0;
-    font: 12px/170% Verdana, sans-serif;
-    color: #494949;
-}
-.content {
-	background: #edf5fa;
-	width:300px;
-}
-a:link, a:visited {
-    color: #027AC6;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #0062A0;
-    text-decoration: underline;
-}
-
-a:active, a.active {
-    color: #5895be;
-}
 
 ul.menu, .item-list ul {
     margin: 0.35em 0 0 -0.5em; /* LTR */
     padding: 0;
 }
+
 ul.menu ul, .item-list ul ul {
     margin-left: 0em; /* LTR */
 }
@@ -42,24 +19,29 @@ ul li, ul.menu li, .item-list ul li, li.leaf {
     list-style-image: none;
     background: transparent url(images/menu-leaf.gif) no-repeat 1px .35em; /* LTR */
 }
+
 .cat_close {
 	background-image:url(../images/menu-collapsed.gif);
 	background-repeat:no-repeat;
 	background-position:left;
 }
+
 .cat_open {
 	background-image:url(../images/menu-expanded.gif);
 	background-repeat:no-repeat;
 	background-position:left;
 }
+
 .product {
 	background-image:url(../images/menu-leaf.gif);
 	background-repeat:no-repeat;
 	background-position:left;
 }
+
 a.product, a.cat_close, a.cat_open {
 	text-decoration:none;
 }
+
 #block-category-0 ul li, ul.menu li, .item-list ul li, li.leaf {
     margin-left: 0em; /* LTR */
     padding: 0 0 .2em .5em;

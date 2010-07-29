@@ -1,13 +1,13 @@
 <?php
 $this->breadcrumbs=array(
 	'Panel administracyjny'=>array('/cms/default/index'),
-	$model->getContent()->name=>array('/cms/content/view','id'=>$model->getContent()->id),
+	$model->content->name=>array('/cms/content/view','id'=>$model->content->id),
 	'Dodaj zawartość do kategorii',
 );
 
 $this->menu=array(
-	array('label'=>'Powrót do "'.$model->getContent()->name.'"',
-        'url'=>array('/cms/content/view','id'=>$model->getContent()->id)),
+	array('label'=>'Powrót do "'.$model->content->name.'"',
+        'url'=>array('/cms/content/view','id'=>$model->content->id)),
 );
 ?>
 

@@ -5,18 +5,30 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<?php
-// Example of manual content distribution
-//Yii::app()->getModule('cms')->getContent(2, array('render'=>true, 'header_tag'=>'h2'));
-?>
-
+<div style="float:left;width:200px;border-right:#ccc 1px solid;padding: 15px 0px;">
 <?php
 // Example of using CSimpleGalleryWidget to render gallery
 $this->widget(
     'application.modules.cms.extensions.jLeftMenu.CJLeftMenuWidget', 
     array(
         'taksonomy_id'=>5,
+        'content_action'=>array('/site/page', 'view'=>'example_taksonomy'),
+        //'clickable_cats'=>true,
+        //'category_action'=>array('/site/page', 'view'=>'example_taksonomy'),
     )
 );
 ?>
+</div>
 
+<div style="float:right;width:670px;">
+<?php
+if (!isset($_GET['content_id']))
+    $content_id = 2;
+else
+    $content_id = $_GET['content_id'];
+
+Yii::app()->getModule('cms')->getContent($content_id, array('render'=>true, 'header_tag'=>'h2'));
+?>
+</div>
+
+<div style="clear:both;"></div>
