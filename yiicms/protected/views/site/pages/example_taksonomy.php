@@ -27,7 +27,14 @@ if (!isset($_GET['content_id']))
 else
     $content_id = $_GET['content_id'];
 
-Yii::app()->getModule('cms')->getContent($content_id, array('render'=>true, 'header_tag'=>'h2'));
+$this->widget(
+    'application.modules.cms.extensions.simpleContentRenderer.CSimpleContentRendererWidget', 
+    array(
+        'content_id'=>2,
+        'header_tag'=>'h2',
+        'print_author'=>false,
+    )
+);
 ?>
 </div>
 

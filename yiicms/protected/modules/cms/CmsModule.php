@@ -41,17 +41,8 @@ class CmsModule extends CWebModule
 	}
 
     // TODO: create a simpleContentRenderer insted getContent with rendering feature
-    public function getContent($content_id, $opts = array())
+    public function getContent($content_id)
     {
-        $header = 'h1';
-        if (isset($opts['header_tag']))
-            $header = $opts['header_tag'];
-
-        $content = Content::model()->findByPk($content_id);
-        if ($opts['render']) {
-            print '<'.$header.'>'.$content->name.'</'.$header.'>';
-            print $content->html;
-        }
         return $content->attributes;
     }
 
@@ -63,7 +54,8 @@ class CmsModule extends CWebModule
                         'Zalogowany jako <strong>'.Yii::app()->user->name.'</strong>. '.
                         CHtml::link('Otwórz panel administracyjny', 
                             Yii::app()->createUrl('/cms/default/index')).' | '.
-                        CHtml::link(CHtml::image($this->assets.'/door_in.png').' Wloguj się', Yii::app()->createUrl('/site/logout')).
+                        CHtml::link(CHtml::image($this->assets.'/door_in.png').
+                            ' Wloguj się', Yii::app()->createUrl('/site/logout')).
                 '</div>';
         }
         return '';

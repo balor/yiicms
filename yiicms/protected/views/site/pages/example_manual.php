@@ -6,8 +6,15 @@ $this->breadcrumbs=array(
 ?>
 
 <?php
-// Example of manual content distribution
-Yii::app()->getModule('cms')->getContent(2, array('render'=>true, 'header_tag'=>'h2'));
+// Example of using CSimpleContentRendererWidget
+$this->widget(
+    'application.modules.cms.extensions.simpleContentRenderer.CSimpleContentRendererWidget', 
+    array(
+        'content_id'=>2,
+        'header_tag'=>'h2',
+        'print_author'=>false,
+    )
+);
 ?>
 
 <?php
